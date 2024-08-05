@@ -8,12 +8,25 @@ class MainClass
         Console.WriteLine("Введите количество элементов массива:");
         int size = int.Parse(Console.ReadLine());
         int[] numbers = new int[size];
-        numbers = DoArraySorting(GetArrayFromConsole(size));
+        
+        //bool needSorting = false;
+        bool needSorting = true;
+
+        ShowArray(GetArrayFromConsole(), needSorting);        
+        
+        //numbers = DoArraySorting(GetArrayFromConsole(size)); // call with mandatory par
+        numbers = DoArraySorting(GetArrayFromConsole()); // call with non-mandatory par
 
         foreach (int i in numbers) Console.WriteLine(i);
     }
 
-    private static int[] GetArrayFromConsole(int size)
+    private static void ShowArray(int[] numbers, bool needSorting = false)
+    {
+        if (needSorting) numbers = DoArraySorting(numbers);
+        foreach (int i in numbers) Console.WriteLine(i);
+    }
+
+    private static int[] GetArrayFromConsole(int size = 5) // non-mandatory par
     {
         int[] interimArray = new int[size];
         for (int i = 0; i < size; i++)
